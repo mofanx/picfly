@@ -1,0 +1,71 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "picfly"
+version = "0.1.0"
+description = "图片工具：截图上传图床、OCR 文字识别，支持全局热键"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "mofanx", email = "yanwuning@live.cn"}
+]
+maintainers = [
+    {name = "mofanx", email = "yanwuning@live.cn"}
+]
+keywords = ["screenshot", "ocr", "image", "upload", "hotkey"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Win32 (MS Windows)",
+    "Intended Audience :: Developers",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: Microsoft :: Windows",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Multimedia :: Graphics :: Capture :: Screen Capture",
+    "Topic :: Utilities",
+]
+requires-python = ">=3.9"
+dependencies = [
+    "requests>=2.25.0",
+    "Pillow>=9.0.0",
+    "pynput>=1.7.0",
+    "pyclip>=0.7.0",
+    "plyer>=2.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=23.0.0",
+    "ruff>=0.1.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/mofanx/picfly"
+Repository = "https://github.com/mofanx/picfly"
+Issues = "https://github.com/mofanx/picfly/issues"
+
+[project.scripts]
+picfly = "picfly:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["picfly*"]
+
+[tool.setuptools.package-data]
+picfly = ["py.typed"]
+
+[tool.black]
+line-length = 100
+target-version = ["py39", "py310", "py311", "py312"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
