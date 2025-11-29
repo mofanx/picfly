@@ -1,6 +1,6 @@
 # picfly
 
-开源图片工具集，支持截图上传图床、OCR 文字识别，通过全局热键快速调用。
+开源图片工具集，支持截图上传图床、OCR 文字识别，通过全局热键快速调用。现已兼容 Windows / Linux（Wayland & X11），Wayland 环境自动调用 XDG Portal，自带系统截图 UI。
 
 ## 功能特性
 
@@ -15,6 +15,19 @@
 ```bash
 pip install picfly
 ```
+
+> **提示**：若使用 Conda/Mamba，请先 `mamba activate base` 后再安装。
+
+### Linux 额外依赖
+
+Wayland/X11 下需要额外的 DBus 绑定与截图依赖，可直接使用 Mamba：
+
+```bash
+mamba activate base
+mamba install pillow mss dbus-next dbus-python -c conda-forge
+```
+
+若使用系统包管理器，请确保已安装 `dbus-python`（或 `python3-dbus`）以及图形环境的 DBus 服务。
 
 ## 环境变量配置
 
@@ -91,21 +104,24 @@ text = ocr.recognize(image_bytes)  # 二进制数据
 from picfly.utils import RegionSelector
 
 selector = RegionSelector()
-image = selector.select()  # 返回 PIL Image 或 None
+image = selector.screenshot()  # Wayland 自动调用 Portal，X11/Windows 弹出 Tk 拖拽
 ```
 
 ## 系统要求
 
-- **操作系统**：Windows 10/11
+- **操作系统**：Windows 10/11，Linux 桌面（Wayland 或 X11）
 - **Python**：3.9+
 
 ## 依赖
 
 - `requests` - HTTP 请求
-- `Pillow` - 图像处理
+- `Pillow` - 图像处理 / Tk 画布截图
+- `mss` - X11/Windows 截图抓取
+- `dbus-next` - Wayland Portal 截图
+- `dbus-python` - Linux 桌面通知所需 DBus 绑定（仅 Linux）
 - `pynput` - 全局热键监听
-- `pyperclip` - 剪贴板操作
-- `plyer` - Windows 桌面通知
+- `pyclip` - 剪贴板操作
+- `plyer` - 跨平台桌面通知
 
 ## 许可证
 

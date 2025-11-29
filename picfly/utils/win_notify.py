@@ -1,7 +1,9 @@
 from plyer import notification
 import time
+from typing import Optional
 
-def desktop_notification(message="", title="picfly", timeout=5):
+
+def desktop_notification(message="", title="picfly", timeout=5, icon_path: Optional[str] = None):
     """
     桌面气泡通知。
 
@@ -13,13 +15,15 @@ def desktop_notification(message="", title="picfly", timeout=5):
     # 截断超长字符串（避免超限）
     title = title[:20]  # 标题最多20字符
     message = message[:64]  # 内容最多64字符
+    app_icon = icon_path or ""
     notification.notify(
         title=title,
         message=message,
         app_name="IMTools",  # 通知来源名称
-        app_icon=None,  # 可指定 .ico 图标路径（可选）
+        app_icon=app_icon,  # DBus 需字符串，空串表示无图标
         timeout=timeout  # 自动关闭时间
     )
+
     # # 等待通知显示完成（避免脚本提前退出导致通知不显示）
     # time.sleep(timeout)
 

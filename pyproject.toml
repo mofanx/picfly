@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "picfly"
-version = "0.1.0"
+version = "0.1.1"
 description = "图片工具：截图上传图床、OCR 文字识别，支持全局热键"
 readme = "README.md"
 license = {text = "MIT"}
@@ -34,6 +34,8 @@ requires-python = ">=3.9"
 dependencies = [
     "requests>=2.25.0",
     "Pillow>=9.0.0",
+    "mss>=9.0.0",
+    "dbus-next>=0.2.3",
     "pynput>=1.7.0",
     "pyclip>=0.7.0",
     "plyer>=2.0.0",
@@ -45,6 +47,9 @@ dev = [
     "pytest-cov>=4.0.0",
     "black>=23.0.0",
     "ruff>=0.1.0",
+]
+linux = [
+    "dbus-python>=1.2.18",
 ]
 
 [project.urls]
